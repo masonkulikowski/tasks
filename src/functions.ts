@@ -12,16 +12,11 @@ export function fahrenheitToCelius(temperature: number): number {
  * if the number is greater than zero.
  */
 export function add3(first: number, second: number, third: number): number {
-    let sum = 0;
-    if (first > 0) {
-        sum += first;
-    }
-    if (second > 0) {
-        sum += second;
-    }
-    if (third > 0) {
-        sum += third;
-    }
+    const numbers = [first, second, third];
+    const sum = numbers.reduce(
+        (total, num) => (num > 0 ? total + num : total),
+        0
+    );
     return sum;
 }
 
@@ -30,7 +25,7 @@ export function add3(first: number, second: number, third: number): number {
  * mark added to the end.
  */
 export function shout(message: string): string {
-    return "";
+    return message.toUpperCase() + "!";
 }
 
 /**
@@ -48,4 +43,12 @@ export function isQuestion(message: string): boolean {
  */
 export function convertYesNo(word: string): boolean | null {
     return true;
+}
+function total(
+    previousValue: number,
+    currentValue: number,
+    currentIndex: number,
+    array: number[]
+): number {
+    throw new Error("Function not implemented.");
 }
