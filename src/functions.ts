@@ -50,11 +50,3 @@ export function convertYesNo(word: string): boolean | null {
         return null;
     }
 }
-function total(
-    previousValue: number,
-    currentValue: number,
-    currentIndex: number,
-    array: number[]
-): number {
-    throw new Error("Function not implemented.");
-}
