@@ -84,7 +84,8 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    if (addends.length === 0) return "0=0";
+    return `${addends.reduce((sum, n) => sum + n, 0)}=${addends.join("+")}`;
 }
 
 /**
@@ -97,5 +98,17 @@ export function makeMath(addends: number[]): string {
  * And the array [1, 9, 7] would become [1, 9, 7, 17]
  */
 export function injectPositive(values: number[]): number[] {
-    return [];
+    let sum = 0;
+    let inserted = false;
+
+    const result = values.reduce((acc: number[], value: number) => {
+        sum += value;
+        if (value < 0 && !inserted) {
+            inserted = true;
+            return [...acc, value, sum - value];
+        }
+        return [...acc, value];
+    }, []);
+
+    return inserted ? result : [...result, sum];
 }
