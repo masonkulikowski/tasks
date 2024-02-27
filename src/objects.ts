@@ -106,6 +106,7 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
+    question.published = !question.published;
     return question;
 }
 
