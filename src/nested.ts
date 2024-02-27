@@ -181,7 +181,22 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    return [];
+    const newQuestions = [
+        ...questions.map((question) => {
+            if (question.id === targetId) {
+                return {
+                    ...question,
+                    type: newQuestionType,
+                    options:
+                        newQuestionType === "multiple_choice_question"
+                            ? question.options
+                            : []
+                };
+            }
+            return question;
+        })
+    ];
+    return newQuestions;
 }
 
 /**
