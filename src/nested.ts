@@ -209,13 +209,44 @@ export function changeQuestionTypeById(
  * Remember, if a function starts getting too complicated, think about how a helper function
  * can make it simpler! Break down complicated tasks into little pieces.
  */
+
+function replaceOption(
+    options: string[],
+    index: number,
+    newOption: string
+): string[] {
+    if (index === -1) return [...options, newOption];
+    else
+        return [
+            ...options.slice(0, index),
+            newOption,
+            ...options.slice(index + 1)
+        ];
+}
+
 export function editOption(
     questions: Question[],
     targetId: number,
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    const newQuestions: Question[] = [
+        ...questions.map((question) => {
+            if (question.id === targetId) {
+                return {
+                    ...question,
+                    options: replaceOption(
+                        question.options,
+                        targetOptionIndex,
+                        newOption
+                    )
+                };
+            } else {
+                return question;
+            }
+        })
+    ];
+    return newQuestions;
 }
 
 /***
@@ -229,5 +260,11 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
+    const newQuestions = questions.map((question) => {
+        if (question.id === targetId) {
+            return { duplicateQuestion: question, newId };
+        }
+        return question;
+    });
     return [];
 }
