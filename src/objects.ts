@@ -42,16 +42,14 @@ export function isCorrect(question: Question, answer: string): boolean {
  * any answer is valid. But for a `multiple_choice_question`, the `answer` must
  * be exactly one of the options.
  */
-export function isValid(
-    question: Question,
-    answer: string
-): boolean | undefined {
+export function isValid(question: Question, answer: string): boolean {
+    let ans = false;
     if (question.type === "short_answer_question") {
-        return true;
-    } else if (question.type === "multiple_choice_question") {
-        return question.options.includes(answer);
+        ans = true;
+    } else {
+        ans = question.options.includes(answer);
     }
-    return undefined;
+    return ans;
 }
 
 /**
